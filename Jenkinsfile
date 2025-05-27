@@ -65,5 +65,12 @@ pipeline {
                 }
             }
         }
+        stage('kubernetes deploy') {
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: 'roboshop', contextName: '', credentialsId: 'kube-auth', namespace: 'default', restrictKubeConfigAccess: false, serverUrl: 'https://D2FB587A4C8CC5B390EEB839141719A1.gr7.us-east-1.eks.amazonaws.com') {
+                    sh 'kubectl apply -f deployment-service.yml'
+              }
+            }
+        }
     }
 }
