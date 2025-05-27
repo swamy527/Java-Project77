@@ -48,7 +48,12 @@ pipeline {
         }
         stage('build image') {
             steps {
-                sh 'docker build -t dockerswaha/taskmaster .'
+                sh 'docker build -t dockerswaha/taskmaster:latest .'
+            }
+        }
+        stage('image scan') {
+            steps {
+                sh 'trivy image --format table -o image.html dockerswaha/taskmaster:latest'
             }
         }
     }
