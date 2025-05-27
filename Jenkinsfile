@@ -56,5 +56,14 @@ pipeline {
                 sh 'trivy image --format table -o image.html dockerswaha/taskmaster:latest'
             }
         }
+        stage('image publish') {
+            steps {
+                script {
+                   withDockerRegistry(credentialsId: 'docker-auth') {
+                    sh 'docker push dockerswaha/taskmaster:latest'
+                   }  
+                }
+            }
+        }
     }
 }
