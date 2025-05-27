@@ -46,5 +46,10 @@ pipeline {
                 }
             }
         }
+        stage('build image') {
+            steps {
+                sh 'docker build -t dockerswaha/taskmaster .'
+            }
+        }
     }
 }
